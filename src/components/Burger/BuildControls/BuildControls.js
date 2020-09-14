@@ -9,11 +9,10 @@ const controls = [
     { label: 'Meat', type: 'meat' },
 ];
 
-
 export default (props) => (
     <div className={classes.BuildControls}>
         {
-            controls.map(c => <BuildControl label={c.label} add={props.add} remove={props.remove} />)
+            controls.map((c, idx) => <BuildControl key={`${idx}-${c.label}`} label={c.label} added={() => props.added(c.type)} removed={() => props.removed(c.type)} />)
         }
     </div>
 );
