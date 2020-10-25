@@ -4,6 +4,13 @@ import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/Burger/BuildControls/BuildControls';
 
 // this is a single page, it will be container.
+const INGREDIENT_PRICES = {
+    'cheese': 0.4,
+    'meat': 1.3,
+    'salad': 0.5,
+    'bacon': 1.5,
+};
+
 class BurgerBuilder extends Component {
 
     state = {
@@ -12,8 +19,9 @@ class BurgerBuilder extends Component {
             'meat': 0,
             'salad': 0,
             'bacon': 0,
-        }
-    }
+        },
+        totalPrice: 4,
+    };
 
     addIngredientHandler = (type) => {
         this.setState((prevState) => {
@@ -22,6 +30,7 @@ class BurgerBuilder extends Component {
             };
 
             curr.ingredients[type] = curr.ingredients[type] + 1;
+            curr.totalPrice = curr.totalPrice + INGREDIENT_PRICES[type];
             return curr;
         });
     };
@@ -33,6 +42,8 @@ class BurgerBuilder extends Component {
             };
 
             curr.ingredients[type] = curr.ingredients[type] - 1;
+            curr.totalPrice = curr.totalPrice - INGREDIENT_PRICES[type];
+
             return curr;
         });
     }
@@ -41,7 +52,8 @@ class BurgerBuilder extends Component {
         return (
             <Aux>
                 <Burger ingredients={this.state.ingredients} />
-                <BurgerControls added={this.addIngredientHandler} removed={this.removeIngredientHandler} />
+                <div>{this.state.totalPrice}</div>
+                <BurgerControls ingredientAdded={this.addIngredientHandler} removed={this.removeIngredientHandler} />
             </Aux>
         );
     }

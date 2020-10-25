@@ -12,7 +12,7 @@ const controls = [
 export default (props) => (
     <div className={classes.BuildControls}>
         {
-            controls.map((c, idx) => <BuildControl key={`${idx}-${c.label}`} label={c.label} added={() => props.added(c.type)} removed={() => props.removed(c.type)} />)
+            controls.map((c, idx) => <BuildControl key={`${idx}-${c.label}`} label={c.label} added={() => props.ingredientAdded(c.type)} removed={() => props.removed(c.type)} />)
         }
     </div>
 );
